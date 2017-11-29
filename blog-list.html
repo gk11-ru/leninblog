@@ -1,0 +1,85 @@
+%from api.sx import dateg, rend, tri_fmt, b64d
+%from api import get_msg, lst
+%include ('01.html', title='', u=u, ea=ea, btop=len(blogs))
+
+<div class="wrapper row3">
+  <div id="container" class="clear">
+
+
+%tmp = list(reversed(blogs))[(pge*15):][:15]
+%skak, i = [''] + tmp + [''], 0
+%for n in tmp:
+%o = get_msg(n)
+%i += 1
+
+<a name="go_{{n}}"></a>
+<div class="wrapper">
+
+    <div class="three_quarter">
+
+        <h2>
+%if skak[i-1]:
+    <a href="#go_{{skak[i-1]}}" title="Прокрутить к предыдущему заголовку"><span class="icon-caret-up dkgrey"></span></a>
+%else:
+    <span class="icon-caret-up grey"></span>
+%end
+%if skak[i+1]:
+    <a href="#go_{{skak[i+1]}}" title="Прокрутить к следующему заголовку"><span class="icon-caret-down dkgrey"></span></a>
+%else:
+    <span class="icon-caret-down grey"></span>
+%end
+
+<a href="/msg/{{n}}">{{o.title}}</a>
+
+%commline = '*' * comms[n]
+%commline = commline.replace('*****','<span class="icon-comment red"></span>')
+%commline = commline.replace('*','<span class="icon-comment-alt green"></span>')
+
+        <br />  <a href="/msg/{{n}}" title="{{tri_fmt(comms[n])}}">{{! commline }}</a></h2>
+
+        <time>{{o.who}} @ <strong>{{dateg(o.date,'%d.%m.%Y %H:%M')}} UTC</strong></time>
+<div class="wrapper clear">
+            <p>{{!rend(o.txt.decode('utf-8'),'imgholder rnd12')}}</p>
+</div>
+
+        <ul class="list tagcloud rnd8">
+%if o.tags:
+%for ti in o.tags.split(','):
+<li class="{{'active' if ti==get('tag') else ''}}"><a href="/tag/{{ti}}"><span class="icon-tags"></span> {{b64d(ti)}}</a></li>
+%end
+%end
+        </ul>
+
+    </div>
+
+    <div class="one_quarter">
+        <section id="comments">
+            <ul>
+%for x in reversed(lst('topic/%s' %n)[6:][-3:]):
+%cm = get_msg(x)
+          <li class="comment_good rnd5">
+<a href="/msg/{{cm.topicid}}#go_{{cm.msgid}}" title="Перейти к комментарию"><strong>{{cm.who}}</strong></a><span class="icon-time" title="{{ dateg(cm.date,'%d/%m/%Y %H:%M:%S') }}"></span></a> {{ cm.txt.decode('utf-8')[:100] }}
+          </li>
+%end
+            </ul>
+        </section>
+    </div>
+    </div>
+<div class="clear"></div>
+<hr style="margin-bottom: 40px; margin-top: 20px; color:#DDDDDD" size="1" noshadow="noshadow" />
+%end
+
+%pages = 1+((len(blogs)-1) // 15)
+%if pages > 1:
+        <ul class="list tagcloud rnd8">
+%for x in range(pages):
+          <li class="pagin{{'x' if x == pge else ''}}"><a href="/blog/{{ea}}?page={{x+1}}">{{x+1}}</a></li>
+%end
+</ul>
+%end
+
+
+  </div>
+</div>
+
+%include ('02.html', u=u, ea=ea)

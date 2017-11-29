@@ -1,0 +1,56 @@
+%include ('01.html', u=u, title='', ea=ea)
+
+<div class="wrapper row3">
+  <div id="container" class="clear">
+
+<div class="alert-msg rnd8 warning">User: <strong>{{u.uname}}</strong></div>
+
+<h2>Добавить новость</h2>
+
+<section id="comments">
+
+<form method="POST" action="/new">
+
+          <p>
+            <label for="name"><small>Заголовок</small></label>
+            <input type="text" name="title" id="title" value="" size="22" style="width:100%"  required="required">
+          </p>
+          <p>
+            <label for="comment" class="hidden"><small>Текст новости</small></label>
+            <textarea name="txt" id="txt" cols="25" rows="15" required="required" style="width:100%"></textarea>
+          </p>
+
+
+          <p>
+            <label><small>Тэги (через запятую)</small></label>
+            <input type="text" name="tags" id="tags" value="" style="width:100%" size="22">
+          </p>
+
+
+%if not u.kvitok:
+          <p>
+            <label><small>Квиток авторизации</small></label>
+            <input type="text" name="kvitok" id="kvitok" value="" style="width:100%" size="22">
+          </p>
+
+%else:
+        <input type="hidden" name="kvitok" value="{{u.kvitok}}">
+%end
+
+        <input type="hidden" name="typ" value="blog">
+        <input type="hidden" name="ea" value="{{ea}}">
+        <input type="hidden" name="to" value="All">
+
+            <br><input type="submit" id="submit" value="Сохранить">
+          <p>
+            <label><small>Картинки: по желанию, прямые ссылки (если несколько, разделить пробелом)</small></label>
+            <input type="text" name="pic" id="pic" value="" style="width:100%" size="22">
+          </p>
+
+</form>
+
+</section>
+
+</div></div>
+
+%include ('02.html', u=u, ea=ea)

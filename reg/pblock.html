@@ -1,0 +1,48 @@
+%import api, api.sx as sx
+
+      <table>
+          <thead>
+            <tr>
+              <th>Что</th>
+              <th>Как</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="light">
+              <td>Логин</td>
+              <td><strong>{{uname}}</strong></td>
+            </tr>
+%usermsgs=api.lst('carbon/_' + api.hsh(uname))
+%tl=set(api.lst('topic.list'))
+%topics=[x for x in usermsgs if x in tl]
+            <tr class="dark">
+              <td>Новостей</td>
+              <td><strong><a href="/carbon/news//{{uname}}">{{len(topics)}}</strong></td>
+            </tr>
+
+            <tr class="light">
+              <td>Комментариев</td>
+              <td><strong><a href="/carbon/from//{{uname}}">{{len(usermsgs)-len(topics)}}</strong></td>
+            </tr>
+%if ea:
+%el = set(api.get_ea(ea))
+%usermsgs = [x for x in usermsgs if x in el]
+%topics = [x for x in topics if x in el]
+            <tr class="dark">
+              <td>Блог</td>
+              <td><strong>{{ea}}</strong></td>
+            </tr>
+
+
+            <tr class="light">
+              <td>... новостей</td>
+              <td><strong><a href="/carbon/news/{{ea}}/{{uname}}">{{len(topics)}}</strong></td>
+            </tr>
+
+            <tr class="dark">
+              <td>... комментариев</td>
+              <td><strong><a href="/carbon/from/{{ea}}/{{uname}}">{{len(usermsgs)-len(topics)}}</strong></td>
+            </tr>
+%end
+          </tbody>
+        </table>

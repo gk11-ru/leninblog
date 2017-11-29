@@ -1,0 +1,45 @@
+%include ('01.html',u=u,ea=ea,title=u'Зарегистрировать новый логин')
+
+<div class="wrapper row3">
+  <div id="container" class="clear">
+
+
+<h2>Зарегистрировать новый логин</h2>
+
+<div class="alert-msg rnd8 warning">Создать новый логин</div>
+
+<section id="comments">
+
+<form method="POST" action="/user/me">
+
+          <p>
+            <label for="name"><small>имя пользователя</small></label>
+            <input type="text" name="uname" id="uname" value="" size="22"  required="required">
+          </p>
+
+          <p>
+            <label for="name"><small>пароль</small></label>
+            <input type="password" name="upass1" id="upass1" value="" size="22"  required="required">
+          </p>
+          <p>
+            <label for="name"><small>повторить пароль</small></label>
+            <input type="password" name="upass2" id="upass2" value="" size="22"  required="required">
+          </p>
+          <p>
+            <label for="name"><small>число пятьдесят один, цифрами</small></label>
+            <input type="text" name="ucheck" id="ucheck" value="" size="22"  required="required">
+          </p>
+
+          <p>
+
+            <input type="submit" id="submit" value="Сохранить">
+          </p>
+<input type="hidden" name="ea" value="{{ea}}">
+
+</form>
+
+</section>
+
+</div></div>
+
+%include ('02.html',ea=ea,u=u)

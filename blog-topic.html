@@ -1,0 +1,101 @@
+%import api, conf
+%from api.sx import dateg, rend, tri_fmt, b64d
+%jd, comm = mo[0], mo[1:]
+
+%include ('01.html',u=u,ea=jd.ea,title=jd.title)
+
+<div class="wrapper row3">
+  <div id="container" class="clear">
+    <!-- content body -->
+    <div id="content">
+      <section>
+<a name="go_{{jd.msgid}}"></a>
+        <h2>{{jd.title}}
+%if admikey:
+<a href="/admin/del?msgid={{jd.msgid}}&who={{jd.who}}&addr={{jd.addr}}"><span class="icon-remove-sign red"></span></a>
+%end
+</h2>
+        <time><b><a href="/carbon/news/{{jd.ea}}/{{jd.who}}">{{jd.who}}</a></b> @ <strong>{{dateg(jd.date,'%d.%m.%Y %H:%M')}}</strong></time>
+
+<div style="width:95%;letter-spacing:5px" align="right">
+
+<a title="Перейти к комментариям" href="#comm"><span class="icon-comments green"></span></a>
+<a title="Подписка на комментарии топика" href="/rss/topic/{{jd.msgid}}"><span class="icon-rss orange"></span></a>
+&nbsp;&nbsp;<a title="Версия для печати" href="/print/{{jd.msgid}}"><span class="icon-print black"></span></a>
+<a title="Share to Twitter" href="http://twitter.com/home?status={{jd.title}} {{conf.URL}}/msg/{{jd.msgid}}"><span class="icon-twitter purple"></span></a>
+<a title="Share to Facebook" href="http://www.facebook.com/share.php?u={{conf.URL}}/msg/{{jd.msgid}}&t={{jd.title}}"><span class="icon-facebook blue"></span></a>
+<a title="Share to vk.com" href="http://vk.com/share.php?url={{conf.URL}}/msg/{{jd.msgid}}&title={{jd.title}}"><span class="icon-vk red"></span></a>
+</div>
+
+        <p>{{! rend(jd.txt.decode('utf-8'),'imgholder rnd12') }}</p>
+      </section>
+
+      <section>        <ul class="list tagcloud rnd8">
+
+%if jd.tags:
+%for ti in jd.tags.split(','):
+<li><a href="/tag/{{ti}}"><span class="icon-tags"></span> {{b64d(ti)}}</a></li>
+%end
+%end
+      </ul> </section>
+
+      <section id="comments">
+        <a name="comm"></a>
+        <h1>Комментарии 
+
+%commline = '*' * len(comm)
+%commline = commline.replace('*****','<span class="icon-comment red"></span>')
+%commline = commline.replace('*','<span class="icon-comment-alt green"></span>')
+        <span title="{{tri_fmt(len(mo))}}">{{! commline }}</a></h1>
+
+
+%include ('commblog.html', comm=comm)
+
+        <h2>Добавить комментарий</h2>
+        <form action="/new" method="post">
+            <input type="hidden" name="tid" value="{{jd.tid}}">
+        <input type="hidden" name="typ" value="blog">
+        <input type="hidden" name="ea" value="{{jd.ea}}">
+        <input type="hidden" name="topicid" value="{{jd.topicid}}">
+        <input type="hidden" name="repto" value="{{jd.topicid}}">
+        <input type="hidden" name="to" value="{{jd.who}}">
+        <input type="hidden" name="title" value="Re: {{jd.title}}">
+
+%if u.uname:
+<div class="alert-msg rnd8 warning">User: <strong>{{u.uname}}</strong></div>
+        <input type="hidden" name="kvitok" value="{{u.kvitok}}">
+          <p>
+            <textarea name="txt" id="txt" cols="25" rows="10" required="required"></textarea>
+          </p>
+          <p>
+            <input name="submit" type="submit" id="submit" value="Отправить комментарий">
+          </p>
+%else:
+<div class="alert-msg rnd8 alert"><a href="/user/me">Авторизуйтесь перед тем, как добавлять комментарии</a></div>
+%end
+
+
+
+        </form>
+      </section>
+    </div>
+    <!-- right column -->
+    <aside id="right_column">
+%prevdate = ''
+%side = [api.get_msg(n) for n in reversed(api.lst('et/%s' % jd.ea)[-20:])]
+
+<ul class="list underline">
+%for n in side:
+%if dateg(n.date,'%d.%m.%Y') != prevdate:
+%prevdate = dateg(n.date,'%d.%m.%Y')
+<h2>{{prevdate}}</h2>
+%end
+<li style="padding-left:20px"><span class="icon-edit"></span> <a href="/msg/{{n.msgid}}">{{n.title}}</a></li>
+%end
+</ul>
+
+    </aside>
+  </div>
+</div>
+
+%include ('02.html',ea=jd.ea,u=u)

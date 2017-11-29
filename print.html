@@ -1,0 +1,35 @@
+%from api import sx
+
+<!DOCTYPE html>
+<html lang="ru" dir="ltr">
+<head>
+<title>{{jd.title}}</title>
+<meta charset="utf-8">
+<style>
+.white{color:#FFFFFF;}
+.black{color:#000000;}
+
+.blue{color:#56AED4;}
+.green{color:#C0E079;}
+.grey{color:#A8A8A8;}
+.dkgrey{color:#333333;}
+.orange{color:#FF9900;}
+.purple{color:#9F81A9;}
+.red{color:#D54346;}
+.yellow{color:#FDE803;}
+a {text-decoration: none; color:#56AED4; }
+</style>
+<link rel="icon" type="image/png" href="/s/favicon.png" />
+<link href='/s/webfonts/awesome/font-awesome.min.css' rel='stylesheet' type='text/css'>
+%# <link href='/s/styles/tables.css' rel='stylesheet' type='text/css'>
+</head>
+<body bgcolor="#FFFFFF">
+
+        <h2><a href="/msg/{{jd.msgid}}" style="color:#000000;text-decoration:underline">{{jd.title}}</a></h2>
+        <time><strong>{{jd.who}} @ {{sx.datef(jd.date,'%d.%m.%Y %H:%M')}} utc</strong></time>
+
+        <hr noshade="noshade" />
+
+        <p>{{! sx.rend(jd.txt.decode('utf-8'),'imgholder')}}</p>
+</body>
+</html>

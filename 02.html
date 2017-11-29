@@ -1,0 +1,60 @@
+%import conf
+%from api import topblog, b64u, sx
+
+<a name="page_bottom"></a>
+<div class="wrapper row4">
+  <div id="footer" class="clear">
+    <!-- Section One -->
+    <section class="one_third first">
+        <p style="margin-bottom:15px">
+        <a href="#page_top"><span class="icon-circle-arrow-up grey"></span></a>&nbsp;&nbsp;&nbsp;<a href="/user/me?ea={{ea}}"><span class="icon-user"></span> {{u.uname or u'войти'}}</a></p>
+
+<p>{{conf.DESC}}</p>
+
+    </section>
+    <!-- Section Two -->
+
+    <section class="one_third">
+      <h2 class="title">Топ комментаторов</h2>
+      <div class="ft_tweets">
+        <ul>
+%for i,(k,v) in enumerate(topblog.gettop(ea)):
+            <li>{{i+1}}. <strong class="{{'green' if v==u.uname else ''}}">{{v}}</strong> {{k}}</li>
+%end
+        </ul>
+      </div>
+    </section>
+
+    <section class="one_third">
+      <h2 class="title"><a href="/lastcomm/{{ea}}" style="color:#D2D2D2"> <span class="icon-bullhorn"></span> новые комментарии</a></h2>
+      <div class="ft_tweets">
+        <ul>
+%from rss import lastcomm
+%for n in lastcomm(ea,4):
+          <li><a href="/msg/{{n.topicid}}#go_{{n.msgid}}">{{n.title}}</a> {{n.txt.decode('utf-8')[:90]}} <strong>{{sx.dateg(n.date,'%d/%m %H:%M')}}</strong></li>
+%end
+        </ul>
+      </div>
+    </section>
+
+
+  </div>
+</div>
+
+
+<!-- Copyright -->
+<div class="wrapper row5">
+  <footer id="copyright" class="clear">
+    <p class="fl_left">  <strong>{{conf.BRAND}}</strong> {{conf.TAGLINE}} 
+%if ea:
+&nbsp;&nbsp;&nbsp;&nbsp;
+<a href="/rss/msgs/{{ea}}" class="grey"><span class="icon-rss-sign"></span> новые темы</a>
+&nbsp;&nbsp;&nbsp;
+<a href="/rss/all/{{ea}}" class="grey"><span class="icon-rss-sign"></span> все сообщения блога</a>
+%end
+</p>
+    <p class="fl_right">Template by <a target="_blank" href="http://www.os-templates.com/" title="Free Website Templates">OS Templates</a></p>
+  </footer>
+</div>
+</body>
+</html>

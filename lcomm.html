@@ -1,0 +1,29 @@
+%include ('01.html',u=u,title=u'Последние комментарии',ea=ea)
+
+<!-- content -->
+<div class="wrapper row3">
+  <div id="container" class="clear">
+
+<div class="two_third">
+<section id="comments">
+%include ('commblog.html', comm=comms, out_theme=True)
+</section>
+</div>
+
+<div class="one_third">
+<h2>Комментарии</h2>
+<ul>
+<li>Количество: {{len(comms)}}</li>
+<li>Конференция: {{u'Все конференции' if not ea else ea}}</li>
+</ul>
+
+<hr noshade="noshade" />
+
+</div>
+
+
+  </div>
+</div>
+
+
+%include ('02.html', u=u, ea=ea)

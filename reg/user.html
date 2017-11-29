@@ -1,0 +1,47 @@
+%from api import sx, b64u
+%import conf, random
+%include ('01.html',u=u,title=u.uname or 'auth',ea=ea)
+<body>
+<div class="wrapper row3">
+  <div id="container" class="clear">
+
+<h2>Информация об авторизации</h2>
+
+%if u.check():
+
+<p>Имя: <strong>{{u.uname}}</strong></p>
+<p>Адрес: <strong>{{u.uaddr}}</strong></p>
+<p>Авторизация: принята</p>
+
+<p><a href="/user/me?logout={{random.randint(11111,99999)}}&ea={{ea}}">Разлогиниться</a></p>
+
+<p>Квиток доступа (возможно использовать на доверяющих сайтах, или авторизироваться по нему)</p>
+<input type="text" value=":{{u.kvitok}}:" style="width:100%">
+
+
+%else:
+
+%if u.uname:
+<p><s>Поддельное</s> имя: {{u.uname}}</p>
+%end
+%if u.uaddr:
+<p><s>Поддельный</s> адрес: {{u.uaddr}}</p>
+%end
+<p>Авторизация: нет</p>
+
+<p><a href="/user/register?ea={{ea}}">регистрация</a> или <a href="/user/login?ea={{ea}}">войти</a> (или ввести квиток)</p>
+
+%end
+
+<p>Администратор: 
+%if get('admikey'):
+<strong><a href="/admin?ea={{ea}}">да</a></strong>
+%else:
+<a href="/admin?ea={{ea}}">ввести ключ</a>
+%end
+
+
+                </div>
+            </div>
+
+%include('02.html',u=u,ea=ea)

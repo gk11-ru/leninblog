@@ -1,0 +1,37 @@
+%import api, api.sx as sx
+%include ('01.html', title=u'Статьи пользователя', u=u, ea=ea)
+
+<div class="wrapper row3">
+  <div id="container" class="clear">
+
+      <section class="one_third">
+%include ('reg/pblock.html',uname=uname)
+      </section>
+
+      <section class="two_third">
+
+        <div class="tab-wrapper clear">
+<ul class="tab-nav clear">
+
+    <li class="ui-tabs-active"><a href="/carbon/news/{{ea}}/{{uname}}"><span class="icon-file"> {{uname}}</a></li>
+    <li><a href="/carbon/from/{{ea}}/{{uname}}"><span class="icon-comment"></span> {{uname}}</a></li>
+</ul>
+          <div class="tab-container">
+<h1>Последние 20 новостей</h1>
+%for n in reversed(news):
+%o = api.get_msg(n)
+<div class="alert-msg info rnd8"><a href="/msg/{{o.msgid}}"><strong>{{o.title}}</strong></a><br />
+{{sx.dateg(o.date)}}
+</div>
+%end
+
+          </div>
+        </div>
+      </div>
+      </section>
+
+  </div>
+</div>
+
+
+%include ('02.html',u=u,ea=ea)

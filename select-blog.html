@@ -1,0 +1,15 @@
+%from api import lst
+%include ('01.html', title='Выбрать блог', u=u, ea=ea)
+
+<div class="wrapper row3">
+  <div id="container" class="clear">
+
+%for n,k,v in out:
+<h2><a href="/blog/{{n}}">{{n}}</a> <small class="grey">{{v}}</small> {{k}}</h2>
+%end
+
+
+  </div>
+</div>
+
+%include ('02.html', u=u, ea='')

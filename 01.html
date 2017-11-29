@@ -1,0 +1,81 @@
+%import conf
+%from api import sx, lst, echolist, get_ea
+<!DOCTYPE html>
+<html lang="ru" dir="ltr">
+<head>
+<title>{{title or conf.BRAND}}</title>
+<meta charset="utf-8">
+<link rel="icon" type="image/png" href="/s/favicon.png" />
+<link rel="stylesheet" href="/s/styles/layout.css" type="text/css">
+<script src="/s/scripts/jquery-1.9.1.min.js"></script>
+<script src="/s/scripts/jquery-browsercheck.js"></script>
+<script src="/s/scripts/jquery-defaultvalue.js"></script>
+<script src="/s/scripts/custom.js"></script>
+<!--[if lt IE 9]>
+<link rel="stylesheet" href="/s/styles/ie.css" type="text/css">
+<script src="/s/scripts/ie/html5shiv.min.js"></script>
+<![endif]-->
+
+<!--
+<link href='http://fonts.googleapis.com/css?family=Play:400,700|Andika|PT+Sans+Narrow:400,700|Open+Sans:400,400italic,700,700italic&subset=latin,cyrillic' rel='stylesheet' type='text/css'>
+-->
+<link href='/s/webfonts/awesome/font-awesome.min.css' rel='stylesheet' type='text/css'>
+<link href='/s/webfonts/webfonts.css' rel='stylesheet' type='text/css'>
+
+<style>
+.tmr { font-size:14px; color:#FFFFFF; margin:0 10px 0 0; padding:0 10px 0 0; border-right:1px dotted #D2D2D2; }
+* { font-family: Open Sans }
+</style>
+</head>
+<body>
+<a name="page_top"></a>
+<div class="wrapper row1">
+  <header id="header" class="clear">
+    <hgroup>
+      <h1><a href="{{'/' if not ea else '/blog/%s' % ea}}">{{conf.BRAND}}</a></h1>
+      <h2>{{conf.TAGLINE}}</h2>
+    </hgroup>
+    <nav>
+      <ul class="clear">
+%if u.uname:
+        <li><a href="/user/me?ea={{ea}}"><span class="icon-user blue"></span> {{u.uname}}</a></li>
+%else:
+        <li><a href="/user/login?ea={{ea}}"><span class="icon-key"></span> войти</a></li>
+%end
+%if ea:
+        <li><a href="/new/blog/{{ea}}/-/-"><span class="icon-file"></span> Добавить</a></li>
+        <li><a href="/blog/{{ea}}"><span class="icon-edit"></span> {{ea}}</a></li>
+%end
+        <li><a href="/lastcomm/{{ea}}" title="Новые комментарии к темам"><span class="icon-comment"></span></a></li>
+
+      </ul>
+    </nav>
+  </header>
+</div>
+
+<div  class="wrapper">
+
+<div align="right">
+<div style="float:left">
+<span class="tmr"></span>
+
+          <span class="tmr"> <a href="#page_bottom" title="В подвал"><span class="icon-circle-arrow-down grey"></span></a> </span>
+%if len(echolist()) > 1:
+%if ea != conf.EA:
+            <span class="tmr"><strong><a class="blue" href="/blog/{{conf.EA}}">{{conf.EA}}</a></strong></span>
+%end
+            <span class="tmr"><a class="blue" href="/select-blog">выбрать блог</a></span>
+%end
+</div>
+<span class="tmr"></span>
+          <span class="tmr">всего сообщений: {{len(lst('m.accepted'))}}</span>
+%if ea:
+          <span class="tmr">сообщений в блоге: {{len(get_ea(ea))}}</span>
+%end
+%if ea and get('btop'):
+          <span class="tmr">тем: {{get('btop')}}</span>
+%end
+          <span class="tmr">{{sx.dateg(sx.gts())}} UTC</span>
+
+</div>
+</div>

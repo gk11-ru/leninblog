@@ -1,0 +1,33 @@
+%include ('01.html',u=u,ea=ea,title=u'Вход в систему')
+
+<div class="wrapper row3">
+  <div id="container" class="clear">
+
+
+<h2>Вход</h2>
+
+<p>Если у вас нет логина, заведите его <a href="/user/register?ea={{ea}}">здесь</a></p>
+
+<p>Если у вас есть квиток авторизации, можете авторизироваться по нему, введя его в поле пароля. Поле логина при этом заполнять не надо.</p>
+
+<section id="comments">
+
+<form method="POST" action="/user/me">
+          <p>
+            <label for="name"><small>login</small></label>
+            <input type="text" name="uname" id="uname" value="" size="22">
+          </p>
+
+          <p>
+            <label for="name"><small>password</small></label>
+            <input type="password" name="upass1" id="upass1" value="" size="22"  required="required">
+          </p>
+          <p>
+            <input type="submit" id="submit" value="Войти">
+          </p>
+<input type="hidden" name="ea" value="{{ea}}">
+</form>
+</section>
+</div></div>
+
+%include ('02.html', ea=ea,u=u)

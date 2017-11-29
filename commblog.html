@@ -1,0 +1,38 @@
+%from getave import aa32raw
+%from api import sx
+        <ul>
+%for n in comm:
+        <a name="go_{{n.msgid}}"></a>
+
+          <li class="comment_norm rnd5" id="cid_{{n.msgid}}">
+            <article>
+              <header>
+                <figure>
+
+<a href="/carbon/from/{{n.ea}}/{{n.who}}"><img src="/s/aa32/{{aa32raw(n.who + '\n' + n.addr)}}.png" width="32" height="32" class="rnd8"></a>
+
+                </figure>
+                <address>
+%if admikey:
+<a href="/admin/del?msgid={{n.msgid}}&who={{n.who}}&addr={{n.addr}}"><span class="icon-remove-sign red"></span></a>
+%end
+                <a href="/carbon/from/{{n.ea}}/{{n.who}}">{{n.who}}</a>
+                </address>
+                <time>{{ sx.dateg(n.date,'%d/%m/%Y %H:%M:%S') }} utc
+
+                </time>
+              </header>
+              <section>
+                <p id="textcid_{{n.msgid}}">{{! sx.rend(n.txt.decode('utf-8')) }}</p>
+
+%if defined('out_theme'):
+%nt = n.title.decode('utf-8')
+%nt = nt[4:] if nt.startswith('Re: ') else nt
+<div align="right"><span class="icon-edit"></span> <a href="/msg/{{n.topicid}}#go_{{n.msgid}}">{{nt[:60]}}</a></div>
+%end
+
+              </section>
+            </article>
+          </li>
+%end
+        </ul>

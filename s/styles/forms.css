@@ -1,0 +1,37 @@
+/*
+HTML 5 Template Name: TechBusiness
+File: Forms CSS
+Author: OS Templates
+Author URI: http://www.os-templates.com/
+Licence: <a href="http://www.os-templates.com/template-terms">Website Template Licence</a>
+*/
+
+form, fieldset, legend{margin:0; padding:0; border:none;}
+legend{display:none;}
+input, textarea, select{font-size:12px; font-family:Georgia,"Times New Roman",Times,serif;}
+
+/* ----------------------------------------------Form in Comment Area-------------------------------------*/
+
+#comments form{display:block; width:100%;}
+#comments form input{width:170px; padding:2px; border:1px solid #CCCCCC; margin:5px 5px 0 0;}
+#comments form textarea{width:98%; border:1px solid #CCCCCC; padding:2px; overflow:auto;}
+#comments form p{margin:5px 0;}
+#comments form #submit, #comments form #reset{margin:0; padding:5px; color:#666666; background-color:#F7F7F7; cursor:pointer;}
+
+/* ----------------------------------------------Form in Footer------------------------------------*/
+
+#footer label{display:none;}
+#footer input{display:inline-block; width:178px; margin:0; padding:8px; color:#989898; background-color:#2D3131; border:none;}
+#footer input#nl_submit{width:auto; margin-left:5px; color:#56AED4; background-color:#2D3131; text-transform:uppercase; font-weight:bold; cursor:pointer;}
+
+/* CSS3 Elements */
+
+#comments input, #comments textarea, #comments button, 
+#footer input, #footer textarea, #footer button{
+	-moz-border-radius:5px;
+	-webkit-border-radius:5px;
+	-khtml-border-radius:5px;
+	border-radius:5px;
+	}
+
+input, textarea, select{resize:none; outline:none;}

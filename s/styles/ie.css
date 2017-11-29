@@ -1,0 +1,23 @@
+/*
+HTML 5 Template Name: TechBusiness
+File: IE CSS
+Author: OS Templates
+Author URI: http://www.os-templates.com/
+Licence: <a href="http://www.os-templates.com/template-terms">Website Template Licence</a>
+*/
+
+.clear, .flexslider, .flexslider .slides{zoom:1;}
+
+#header nav ul li, #footer section .social ul li, #slider ol, #slider ol li, #slider ol li a{*display:inline; /* IE7 Specific*/}
+
+#footer input#nl_submit{width:auto; margin:0; *padding:7px 0 6px; /* IE7 Specific*/}
+
+#slider ul.slides li div{
+	background:transparent;
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#B2000000, endColorstr=#B2000000);
+	-ms-filter:"progid:DXImageTransform.Microsoft.gradient(startColorstr=#B2000000, endColorstr=#B2000000)";
+	zoom:1;
+	*bottom:3px; /* IE7 Specific*/
+	}
+
+.accordion-wrapper, .toggle-wrapper{overflow:hidden;}
