@@ -1,9 +1,11 @@
 # -*- coding: utf-8 -*-
 
 import rsa, base64, time, hashlib
-privkey =  rsa.PrivateKey.load_pkcs1( open('data/priv.key').read() )
-
-ADDR='lenina'
+try:
+    privkey =  rsa.PrivateKey.load_pkcs1( open('data/priv.key').read() )
+except:
+    privkey = None
+from conf import ADDR
 
 def _uflt(u):
     return ' '.join(u.split())

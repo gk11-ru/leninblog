@@ -15,6 +15,14 @@
 
 <p><a href="/user/me?logout={{random.randint(11111,99999)}}&ea={{ea}}">Разлогиниться</a></p>
 
+        <div class="tab-wrapper clear">
+    <ul class="tab-nav clear">
+    <li><a href="/carbon/news/{{ea}}/{{u.uname}}"><span class="icon-file"> {{u.uname}}</a></li>
+    <li><a href="/carbon/from/{{ea}}/{{u.uname}}"><span class="icon-comment"></span> {{u.uname}}</a></li>
+    </ul>
+        </div>
+
+
 <p>Квиток доступа (возможно использовать на доверяющих сайтах, или авторизироваться по нему)</p>
 <input type="text" value=":{{u.kvitok}}:" style="width:100%">
 
