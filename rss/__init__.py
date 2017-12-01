@@ -1,4 +1,4 @@
-import api,  PyRSS2Gen, api.sx as sx, datetime
+import api, api.sx as sx, datetime
 import conf
 
 def gen_topic(topicid,num=30):
